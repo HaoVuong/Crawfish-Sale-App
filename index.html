@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crawfish Master</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="logo-container">
+        <img src="logo.jfif" alt="Fresh Bowl Logo" class="logo">
+      </div>
+      <div>
+        <h1>Crawfish Master</h1>
+      </div>
+    </header>
+
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="calculatorTab">Calculator</button>
+      <button class="tab-btn" data-tab="ordersTab">Orders</button>
+    </nav>
+
+    <!-- CALCULATOR TAB -->
+    <section id="calculatorTab" class="tab-panel active">
+      <div class="card">
+        <div class="section-head">
+          <h2>Calculator</h2>
+          <button id="toggleSettingsBtn" class="secondary-btn">
+            Hide Business Settings
+          </button>
+        </div>
+
+        <div id="settingsPanel" class="settings-panel">
+          <div class="sub-card">
+            <h3>Business Settings</h3>
+
+            <div class="grid two">
+              <div class="field">
+                <label for="pricePerLb">Price Per Lb ($)</label>
+                <input type="number" id="pricePerLb" min="0" step="0.01" />
+              </div>
+
+              <div class="field">
+                <label for="maxPerSlot">Max Lbs Per Hour</label>
+                <input type="number" id="maxPerSlot" min="1" step="1" />
+              </div>
+            </div>
+
+            <h4 class="mini-title">Sides Pricing</h4>
+            <div class="grid three">
+              <div class="field">
+                <label for="cornPrice">Corn Price ($ each)</label>
+                <input type="number" id="cornPrice" min="0" step="0.01" />
+              </div>
+
+              <div class="field">
+                <label for="sausagePrice">Sausage Price ($ each)</label>
+                <input type="number" id="sausagePrice" min="0" step="0.01" />
+              </div>
+
+              <div class="field">
+                <label for="potatoPrice">Potato Price ($ each)</label>
+                <input type="number" id="potatoPrice" min="0" step="0.01" />
+              </div>
+            </div>
+          </div>
+
+          <div class="sub-card">
+            <h3>Time Slots</h3>
+
+            <div class="grid three align-end">
+              <div class="field">
+                <label for="newSlotStart">Start Time</label>
+                <input type="time" id="newSlotStart" />
+              </div>
+
+              <div class="field">
+                <label for="newSlotEnd">End Time</label>
+                <input type="time" id="newSlotEnd" />
+              </div>
+
+              <div class="field">
+                <button id="addTimeSlotBtn" class="primary-btn full-width">
+                  Add Time Slot
+                </button>
+              </div>
+            </div>
+
+            <div id="timeSlotList" class="chip-list"></div>
+          </div>
+        </div>
+
+        <div class="sub-card">
+          <h3>Order Info</h3>
+
+          <div class="grid two">
+            <div class="field">
+              <label for="orderDate">Order Date</label>
+              <input type="date" id="orderDate" />
+            </div>
+
+            <div class="field">
+              <label for="timeSlot">Pickup Time Slot</label>
+              <select id="timeSlot"></select>
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div class="field">
+              <label for="customerName">Customer Name</label>
+              <input type="text" id="customerName" placeholder="Enter customer name" />
+            </div>
+
+            <div class="field">
+              <label for="customerInfo">Phone / Contact Info</label>
+              <input type="text" id="customerInfo" placeholder="Phone number or contact info" />
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div class="field">
+              <label for="weight">Crawfish Weight (lbs)</label>
+              <input type="number" id="weight" min="0" step="0.1" placeholder="Enter pounds" />
+            </div>
+
+            <div class="field">
+              <label for="spiceLevel">Spice Level</label>
+              <select id="spiceLevel">
+                <option value="Mild">Mild</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Hot">Hot</option>
+                <option value="Extra Hot">Extra Hot</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid three">
+            <div class="field">
+              <label for="paymentStatus">Payment Status</label>
+              <select id="paymentStatus">
+                <option value="Unpaid" selected>Unpaid</option>
+                <option value="Paid">Paid</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="orderType">Order Type</label>
+              <select id="orderType">
+                <option value="Pickup" selected>Pickup</option>
+                <option value="Dine In">Dine In</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="notes">Notes</label>
+              <input type="text" id="notes" placeholder="Extra notes" />
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-card">
+          <h3>Sides</h3>
+
+          <div class="grid three">
+            <div class="field side-box">
+              <label for="cornQty">Corn</label>
+              <input type="number" id="cornQty" min="0" step="1" value="0" />
+              <small>Subtotal: $<span id="cornSubtotal">0.00</span></small>
+            </div>
+
+            <div class="field side-box">
+              <label for="sausageQty">Sausage</label>
+              <input type="number" id="sausageQty" min="0" step="1" value="0" />
+              <small>Subtotal: $<span id="sausageSubtotal">0.00</span></small>
+            </div>
+
+            <div class="field side-box">
+              <label for="potatoQty">Potato</label>
+              <input type="number" id="potatoQty" min="0" step="1" value="0" />
+              <small>Subtotal: $<span id="potatoSubtotal">0.00</span></small>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-card">
+          <div class="section-head">
+            <h3>Time Slots</h3>
+            <p class="muted">For selected date</p>
+          </div>
+          <div id="slotVisualizer" class="visualizer-grid"></div>
+        </div>
+
+        <div class="totals-panel">
+          <div class="total-line">
+            <span>Crawfish Total</span>
+            <strong>$<span id="crawfishTotal">0.00</span></strong>
+          </div>
+          <div class="total-line">
+            <span>Sides Total</span>
+            <strong>$<span id="sidesTotal">0.00</span></strong>
+          </div>
+          <div class="total-line grand-total">
+            <span>Grand Total</span>
+            <strong>$<span id="grandTotal">0.00</span></strong>
+          </div>
+          <div class="total-line">
+            <span>Selected Slot Availability</span>
+            <strong id="slotAvailability">--</strong>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button id="saveOrderBtn" class="primary-btn">Add Order</button>
+          <button id="cancelEditBtn" class="secondary-btn hidden">Cancel Edit</button>
+        </div>
+
+        <p id="formMessage" class="form-message"></p>
+      </div>
+    </section>
+
+    <!-- ORDERS TAB -->
+    <section id="ordersTab" class="tab-panel">
+      <div class="card">
+        <div class="section-head wrap">
+          <h2>Orders</h2>
+          <div class="toolbar">
+            <button id="exportCsvBtn" class="secondary-btn">Export CSV</button>
+            <button id="clearOrdersBtn" class="danger-btn">Clear All Orders</button>
+          </div>
+        </div>
+
+        <div class="sub-card">
+          <div class="grid two">
+            <div class="field">
+              <label for="ordersDateFilter">View Date</label>
+              <input type="date" id="ordersDateFilter" />
+            </div>
+
+            <div class="field">
+              <label for="searchCustomer">Search Customer</label>
+              <input
+                type="text"
+                id="searchCustomer"
+                placeholder="Search by customer name"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-card">
+          <h3>Time Slot Capacity</h3>
+          <div id="ordersSlotSummary" class="visualizer-grid"></div>
+        </div>
+
+        <div class="sub-card">
+          <h3>Order List</h3>
+          <div id="ordersList" class="orders-list"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js?v=99"></script>
+</body>
+</html>
