@@ -1106,3 +1106,7 @@ async function setupRealtime() {
       console.log("Realtime status:", status);
     });
 }
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/sw.js")
+    .then(() => console.log("SW registered"));
+}
