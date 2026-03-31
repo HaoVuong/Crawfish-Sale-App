@@ -594,12 +594,8 @@ async function handleSaveOrder() {
     return;
   }
 
-  const existingTaken = getTakenWeightForDateAndSlot(date, timeSlotId, editingOrderId);
-  const available = settings.maxPerSlot - existingTaken;
-  if (weight > available) {
-    showFormMessage(`Not enough capacity in that slot. Only ${available.toFixed(1)} lbs left.`, true);
-    return;
-  }
+const existingTaken = getTakenWeightForDateAndSlot(date, timeSlotId, editingOrderId);
+const available = settings.maxPerSlot - existingTaken;
 
   const timeSlot = timeSlots.find((slot) => slot.id === timeSlotId);
   if (!timeSlot) {
